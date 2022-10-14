@@ -1,0 +1,59 @@
+{% load static %}
+
+<header>
+  <div class="container-fluid" id="header">
+    <nav class="navbar navbar-expand-lg bg-transparent">
+      <div class="container">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="{% static 'images/Mor_shoes-removebg-preview.png' %}" alt="" width="100" height="100">
+        </a>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+          <ul class="navbar-nav mb-2 mb-lg-0">
+            <li class="nav-item px-5">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item dropdown px-5">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Categories
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'shoes' %}">All Categories</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% for category in links %}
+                <li><a class="dropdown-item" href="{{category.get_url}}">{{category.category_name}}</a></li>
+                <li><hr class="dropdown-divider"></li>
+                {% endfor %}
+                <!-- <li><a class="dropdown-item" href="#">Women's Shoes</a></li> -->
+              </ul>
+            </li>
+            <li class="nav-item px-5">
+              <a class="nav-link" href="">Promotions</a>
+            </li>
+           
+          </ul>
+          <div class="d-flex px-2">
+            <a class="nav-link" id="search"><i class="fa fa-search" aria-hidden="true"></i></a>
+          </div>
+          <div class="d-flex px-2">
+            <a href="">
+              <i class="fas fa-shopping-cart"></i>
+              <span class="badge rounded-pill badge-notification bg-danger">{{cart_count}}</span>
+            </a>
+          </div>
+          <div class="d-flex px-5">
+            <a href="" class="btn btn login">Login</a>
+          </div>
+          <div class="d-flex px-5">
+            <a href="" class="btn btn login">Logout</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+  </div>
+    
+</header>

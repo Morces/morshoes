@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!--================Cart Area =================-->
+    <section class="cart_area">
+        <div class="container">
+            <div class="cart_inner">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart_items %}
+                            <tr>
+                                <td>
+                                    <div class="media">
+                                        <div class="d-flex">
+                                            <img src="{{cart_item.product.images.url}}" alt="">
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="{{cart_item.product.get_url}}">{{cart_item.product.product_name}}</a>
+                                            <p class="text-muted small">
+                                                {% if cart_item.variations.all %}
+                                                    {% for item in cart_item.variations.all %}
+                                                        {{item.variation_category | capfirst}} : {{item.variation_value | capfirst}} <br>
+                                                    {% endfor %}
+                        
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>${total}}</h5>
+                                </td>
+                                <td>
+                                    <div class="product_count">
+                                        <a class="increase items-count" href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" type="button"><i class="fas fa-minus"></i></a>
+                                        <input type="text" name="qty" id="sst"  value="{{cart_item.quantity}}" title="Quantity:" class="input-text qty">
+                                        <div>
+                                            <form action="{% url 'add_cart' cart_item.product.id %}" method="POST">
+                                                {% csrf_token %}
+                                                {% for item in cart_item.variations.all %}
+                                                <input type="hidden" name="{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                                                
+                                                {% endfor %}
+                                                <button class="reduced items-count" type="button"><i class="fas fa-plus"></i></button>
+                                            </form>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </td>
+                                <td>
+                                    <h5>${grand_total}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="bottom_button">
+                                <td>
+                                    <a class="gray_btn" href="#">Update Cart</a>
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="cupon_text d-flex align-items-center">
+                                        <input type="text" placeholder="Coupon Code">
+                                        <a class="primary-btn" href="#">Apply</a>
+                                        <a class="gray_btn" href="#">Close Coupon</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Subtotal</h5>
+                                </td>
+                                <td>
+                                    <h5>${{cart_item.sub_total}}</h5>
+                                </td>
+                            </tr>
+                            <tr class="shipping_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <h5>Shipping</h5>
+                                </td>
+                                <td>
+                                    <h5>Tax</h5>
+                                </td>
+                                <td>
+                                    <div class="shipping_box">
+                                        <ul class="list">
+                                            
+                                            <li><a href="#">Free Shipping</a></li>
+                                            <li><a href="#">{{tax}}</a></li>
+                                            
+                                        </ul>
+                                        <h6>Calculate Shipping <i class="fa fa-caret-down" aria-hidden="true"></i></h6>
+                                        <select class="shipping_select">
+                                            <option value="1">Nairobi</option>
+                                            <option value="2">Kiambu</option>
+                                            <option value="4">Thika</option>
+                                        </select>
+                                        <!-- <select class="shipping_select">
+                                            <option value="1">Select a State</option>
+                                            <option value="2">Select a State</option>
+                                            <option value="4">Select a State</option>
+                                        </select> -->
+                                        <input type="text" placeholder="Postcode/Zipcode">
+                                        <a class="gray_btn" href="#">Update Details</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            
+                            <tr class="out_button_area">
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                    <div class="checkout_btn_inner d-flex align-items-center">
+                                        <a class="gray_btn" href="{% url 'shoes' %}">Continue Shopping</a>
+                                        
+                                        <a class="primary-btn" href="{% url 'checkout' %}">Proceed to checkout</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Cart Area =================-->
+
+
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="container register"style="width: 70%; margin:auto; margin-top:50px; margin-bottom:50px;">
+  <form class="row g-3" method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+      <div class="col-md-6">
+        <div class="form-outline">
+          <input type="email" class="form-control" id="validationDefault01"  required />
+          <label for="validationDefault01" class="form-label">Email</label>
+        </div>
+      </div>
+          
+      <div class="col-md-6">
+        <div class="form-outline">
+          <input type="password" class="form-control" id="validationDefault03" required />
+          <label for="validationDefault03" class="form-label">Password</label>
+        </div>
+      </div>
+        
+      <div class="col-12">
+        <button class="btn btn login" type="submit" >Login</button>
+      </div>
+    </form>
+  
+  
+</div>
+
+
+{% endblock %}

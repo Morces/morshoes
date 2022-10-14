@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container register" style="width: 70%; margin:auto; margin-top:50px; margin-bottom:50px;">
+    <form class="row g-3 needs-validation" method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="col-md-4">
+          <div class="form-outline">
+            {{form.first_name}}
+            <label for="validationCustom01" class="form-label">First name</label>
+            <!-- <div class="valid-feedback">Looks good!</div> -->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-outline">
+            {{form.last_name}}
+            <label for="validationCustom02" class="form-label">Last name</label>
+            <!-- <div class="valid-feedback">Looks good!</div> -->
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group form-outline">
+            
+            {{form.email}}
+            <label for="validationCustomUsername" class="form-label">Email Address</label>
+            <!-- <div class="invalid-feedback">Please choose a username.</div> -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-outline">
+            {{form.phone_number}}
+            <label for="validationCustom03" class="form-label">Phone Number</label>
+            <!-- <div class="invalid-feedback">Please provide a valid city.</div> -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-outline">
+            {{form.password}}
+            <label for="validationCustom05" class="form-label">Create Password</label>
+            <!-- <div class="invalid-feedback">Please provide a valid zip.</div> -->
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-outline">
+            {{form.confirm_password}}
+            <label class="form-label" for="validationCustom06">Confirm Password</label>
+            <!-- <div class="invalid-feedback">You must agree before submitting.</div> -->
+          </div>
+        </div>
+        <div class="col-12">
+          <button class="btn btn login" type="submit">Register</button>
+        </div>
+      </form>
+      <p class="text-center">Already have an account? <a href="{% url 'login' %}">Login</a> </p>
+</div>
+
+
+{% endblock %}
