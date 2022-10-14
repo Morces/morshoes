@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+
 {% block content %}
 
 <div class="search_input" id="search_input_box">
@@ -323,16 +324,14 @@
 						<a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous">
 							<span aria-hidden="true">&laquo;</span>
 					  	</a>
-
-				  </li>
-				  {% else %}
+					</li>
+				  	{% else %}
 				  <li class="page-item">
 					<a class="page-link" href="?page={{products.previous_page_number}}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 					  </a>
-					
-			  </li>
-			  {% endif %}
+					</li>
+			  		{% endif %}
 				  <li class="page-item"><a class="page-link" href="#">1</a></li>
 				  <li class="page-item active" aria-current="page">
 					<a class="page-link" href="#">2 <span class="visually-hidden">(current)</span></a>
@@ -345,7 +344,7 @@
 				  </li>
 				</ul>
 			  </nav>
-
+			  {% endif %}
 		</div>
 	</div>
 	
