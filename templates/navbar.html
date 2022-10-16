@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item px-5">
-              <a class="nav-link active" href="#">Home</a>
+              <a class="nav-link active" href="{% url 'home' %}">Home</a>
             </li>
             <li class="nav-item dropdown px-5">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -44,13 +44,16 @@
               <span class="badge rounded-pill badge-notification bg-danger">{{cart_count}}</span>
             </a>
           </div>
+          {% if user.id is None %}
           <div class="d-flex px-5">
-            <a href="" class="btn btn login">Login</a>
+            <a href="{% url 'login' %}" class="btn btn login">Login</a>
           </div>
+          {% else %}
           <div class="d-flex px-5">
-            <a href="" class="btn btn login">Logout</a>
+            <a href="{% url 'logout' %}" class="btn btn login">Logout</a>
           </div>
         </div>
+        {% endif %}
       </div>
     </nav>
     

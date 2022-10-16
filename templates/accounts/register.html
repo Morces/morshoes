@@ -3,7 +3,8 @@
 
 {% block content %}
 <div class="container register" style="width: 70%; margin:auto; margin-top:50px; margin-bottom:50px;">
-    <form class="row g-3 needs-validation" method="POST" action="{% url 'register' %}">
+  {% include 'alerts.html' %}  
+  <form class="row g-3 needs-validation" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
         <div class="col-md-4">
           <div class="form-outline">

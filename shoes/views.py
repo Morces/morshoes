@@ -30,7 +30,7 @@ def shoes(request, category_slug=None):
         'products': paged_products,
         'product_count': product_count,
     }
-    return render(request, 'shoes.html', context)
+    return render(request, 'index.html', context)
 
 
 
@@ -61,4 +61,4 @@ def search(request):
         'products': products,
         'product_count':product_count,
     }
-    return render(request, 'shoes.html', context)
+    return render(request, 'search.html', context)

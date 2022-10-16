@@ -2,20 +2,31 @@
 {% load static %}
 {% block content %}
 
+{% if request.GET.command == 'verification' %}
+
+<div class="container mx-auto alert alert-info" role="alert" style="max-width: 380px; margin-top:80px;">
+    Thank you for registering us. We have sent you a verification email to your email address [{{request.GET.email}}]
+    <br><br>
+    Already Verified? <a href="{% url 'login' %}">Login</a>
+</div>
+    
+{% else %}
+
 
 <div class="container register"style="width: 70%; margin:auto; margin-top:50px; margin-bottom:50px;">
+  {% include 'alerts.html' %}
   <form class="row g-3" method="POST" action="{% url 'login' %}">
     {% csrf_token %}
       <div class="col-md-6">
         <div class="form-outline">
-          <input type="email" class="form-control" id="validationDefault01"  required />
+          <input type="email" name="email" class="form-control" id="validationDefault01"  required />
           <label for="validationDefault01" class="form-label">Email</label>
         </div>
       </div>
           
       <div class="col-md-6">
         <div class="form-outline">
-          <input type="password" class="form-control" id="validationDefault03" required />
+          <input type="password" name="password" class="form-control" id="validationDefault03" required />
           <label for="validationDefault03" class="form-label">Password</label>
         </div>
       </div>
@@ -24,9 +35,10 @@
         <button class="btn btn login" type="submit" >Login</button>
       </div>
     </form>
-  
+    <br>
+  <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
   
 </div>
 
-
+{% endif %}
 {% endblock %}

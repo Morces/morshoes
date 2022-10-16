@@ -36,7 +36,7 @@ def register(request):
             #user activation
             current_site = get_current_site(request)
             mail_subject = 'Please Activate Your Account'
-            message = render_to_string('accounts/account_verication_email.html', {
+            message = render_to_string('accounts/verify-account.html', {
                 'user': user,
                 'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -57,8 +57,8 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST['email']
-        password = request.POST['password']
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
         user = auth.authenticate(email=email, password=password)
 
@@ -116,7 +116,7 @@ def login(request):
                     return redirect(nextPage)
                 
             except:
-                return redirect('dashboard')
+                return redirect('home')
         else:
             messages.error(request, 'Invalid Login Credentials!')
             return redirect('login')
